@@ -12,35 +12,26 @@ struct AnatomySecondView: View {
     let optionList:CreateOptionModel?
     @State var question2 = ""
     var body: some View {
-      
         NavigationStack {
-          
-                ZStack{
-                
-                       
-                       
-                 
-                        VStack{
-                            Text("passedValues")
-                            Text(question1?.id ?? "")
-                            Text(question1?.placeHolder ?? "")
-                            .padding()
-                            Text(optionList?.id ?? "")
-                            Text(optionList?.placeHolder ?? "")
-                            
-                            NavigationLink {
-                                AnatomyThirdView()
-                            } label: {
-                                Text("Next")
-                               
-                            }
-                        }
+            ZStack{
+                VStack{
+                    Text("passedValues")
+                    Text(question1?.id ?? "")
+                    Text(question1?.placeHolder ?? "")
+                        .padding()
+                    Text(optionList?.id ?? "")
+                    Text(optionList?.placeHolder ?? "")
+                    NavigationLink {
+                        AnatomyThirdView()
+                    } label: {
+                        Text("Next")
+                    }
                 }
             }
-            .navigationTitle("secondView")
-            .navigationBarBackButtonHidden(false)
         }
-    
+        .navigationTitle("secondView")
+        .navigationBarBackButtonHidden(false)
+    }
 }
 
 struct AnatomySecondView_Previews: PreviewProvider {

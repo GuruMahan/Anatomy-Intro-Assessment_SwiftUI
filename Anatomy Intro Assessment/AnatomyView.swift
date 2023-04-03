@@ -10,80 +10,55 @@ import SwiftUI
 struct AnatomyView: View {
     
     @ObservedObject var viewModel = AnatomyViewModel()
-    
     @State var readyToNavigate: Bool = false
     
     var body: some View {
         NavigationStack{
             ScrollView{
-            ZStack{
-                LinearGradient(colors: [Color(hex:  "#FFDCDCDC").opacity(0.5)], startPoint: .leading, endPoint: .trailing)
-                    .ignoresSafeArea()
-                VStack {
-                    VStack{
-                        headerView
-                            .frame(height: 100)
-                    }
-                    
-                    VStack{
-                        ScrollView {
-                            VStack{
-                                
-                                //  Text(secondView.question1)
-                                ForEach(viewModel.questionsList, id: \.id) { question in
-                                    NavigationLink {
-                                        AnatomySecondView(question1: question, optionList: viewModel.optionSelected)
-                                    } label: {
-                                        questionsView(question:question )
-                                            .foregroundColor(Color.black)
-                                        //viewModel.questionSelected = question
-                                        
-                                        //
-                                    }
-                                    
-                                    .background(Color.white)
-                                    .padding(5)
-                                    
-                                    //                                            .onTapGesture {
-                                    //                                                viewModel.questionSelected = question
-                                    //                                            readyToNavigate = true
-                                    //
-                                    //                                            }
-                                }
-                                .cornerRadius(30)
-                                
-                            }
-                            
+                ZStack{
+                    LinearGradient(colors: [Color(hex:  "#FFDCDCDC").opacity(0.5)], startPoint: .leading, endPoint: .trailing)
+                        .ignoresSafeArea()
+                    VStack {
+                        VStack{
+                            headerView
+                                .frame(height: 100)
                         }
-                        .padding()
-                        bottomView
-                        
+                        VStack{
+                            ScrollView {
+                                VStack{
+                                    ForEach(viewModel.questionsList, id: \.id) { question in
+                                        NavigationLink {
+                                            AnatomySecondView(question1: question, optionList: viewModel.optionSelected)
+                                        } label: {
+                                            questionsView(question:question )
+                                                .foregroundColor(Color.black)
+                                        }
+                                        .background(Color.white)
+                                        .padding(5)
+                                    }
+                                    .cornerRadius(30)
+                                }
+                            }
+                            .padding()
+                            bottomView
+                        }
                     }
                 }
+                .navigationBarTitleDisplayMode(.automatic)
             }
-            
-            .navigationBarTitleDisplayMode(.automatic)
         }
-        }
-        
-        
     }
     
     @ViewBuilder var headerView:some View{
-        
         ZStack {
-            
             LinearGradient(colors:[Color(hex: "1A7BDC"),Color(hex: "56B8FF")], startPoint: .leading, endPoint:.trailing).ignoresSafeArea()
             HStack{
                 Button {
-                    
                 } label: {
                     Image(systemName:"arrow.backward")
                         .foregroundColor(.white)
                 }
                 .padding(.top,-20)
-                
-                
                 VStack {
                     Text("Anatomy Intro Assessment")
                         .foregroundColor(.white)
@@ -92,21 +67,18 @@ struct AnatomyView: View {
                     Text("3 Questions • Quiz Timer 04:00 ")
                         .foregroundColor(.white)
                         .font(Font.system(size: 12))
-                    
                         .padding(.top,1)
                         .padding(.leading,-30)
                 }
                 .padding()
             }
             .padding(.leading,-50)
-            
         }
     }
     
     @ViewBuilder func questionsView(question: CreateQuestionModel) -> some View{
         VStack {
             VStack{
-                
                 Text(question.text)
             }
             Divider()
@@ -123,18 +95,12 @@ struct AnatomyView: View {
                                     .foregroundColor(option.isSelected ? .green : .black)
                             }
                             Text("\(option.placeHolder)")
-                           
                             Spacer()
                         }
                         .padding()
-                       
                         .onTapGesture {
-                           
-                           // readyToNavigate = true
-                            
                         }
                     }
-                    
                 }
             }
             Spacer()
@@ -145,30 +111,11 @@ struct AnatomyView: View {
         .navigationTitle("ThirdView")
         .navigationBarBackButtonHidden(false)
         .navigationBarTitleDisplayMode(.automatic)
-        
     }
     
     
     @ViewBuilder var bottomView: some View{
-        
         ZStack{
-            
-            /*
-             // NavigationLink("Submit", destination: secondView)
-             NavigationLink {
-             secondView
-             } label: {
-             Text("Submit")
-             .font(Font.system(size: 18))
-             .fontWeight(.bold)
-             .frame(width:300,height: 40)
-             .foregroundColor(Color.white)
-             .background(Color.blue)
-             .cornerRadius(20)
-             .padding()
-             
-             }
-             */
             Button {
                 readyToNavigate = true
             } label: {
@@ -181,12 +128,8 @@ struct AnatomyView: View {
                     .cornerRadius(20)
                     .padding()
             }
-            
         }
-        
-        
     }
-    
 }
 
 
@@ -212,7 +155,6 @@ extension Color {
         default:
             (a, r, g, b) = (1, 1, 1, 0)
         }
-        
         self.init(
             .sRGB,
             red: Double(r) / 255,
